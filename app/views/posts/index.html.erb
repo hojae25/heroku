@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img src="http://materializecss.com/images/office.jpg" />
+        </div>
+        <div class="card-content">
+          <div class="card-title"><%= current_user.name %></div>
+          <p>이메일 : <%= current_user.email %></p>
+          <p>올린 글 개수 : <%= @posts_count %></p>
+
+          <%= link_to new_post_path do %>
+              <button class="btn">글 쓰기</button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m8">
+      <% @posts.each do |post| %>
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title"><%= post.user.name %></span>
+              <span><%= post.created_at %></span>
+              <p><%= post.content %></p>
+            </div>
+
+            <div class="card-action">
+              <a href="#">좋아요</a>
+              <% if current_user.id == post.user_id  %>
+              <%= link_to "수정하기", edit_post_path(post), class: "right"  %>
+                  <% end %>
+              <a href="#">댓글 달기</a>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% @posts.each do |post| %>
+<%= post.user.email %>
+<% end %>
